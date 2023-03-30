@@ -12,11 +12,13 @@ import java.util.TreeMap;
 
 class Person
 {
+	private String admissionNumber;
 	private String name;
 	private int age;
 	private String grade;
-	Person(String name,int age,String grade)
+	Person(String admissionNumber,String name,int age,String grade)
 	{
+		this.admissionNumber=admissionNumber;
 		this.name=name;
 		this.age=age;
 		this.grade=grade;
@@ -32,6 +34,10 @@ class Person
 	public void setGrade(String grade)
 	{
 		this.grade=grade;
+	}
+	public String getAdmissionNumber()
+	{
+		return admissionNumber;
 	}
 	public String getName()
 	{
@@ -51,14 +57,14 @@ class Action
 {
 	private static Map<String,Person> student=new TreeMap<String,Person>();
 	
-	public void insertPerson(String name,int age,String grade)
+	public void insertPerson(String admissionNumber,String name,int age,String grade)
 	{
-		Person personObject=new Person(name, age, grade);
-		student.put(name, personObject);
+		Person personObject=new Person(admissionNumber,name, age, grade);
+		student.put(admissionNumber, personObject);
 	}
-	public void modifyPerson(String nameKey,String name,int age,String grade)
+	public void modifyPerson(String admNoKey,String name,int age,String grade)
 	{
-		Person personObjectModify=student.get(nameKey);
+		Person personObjectModify=student.get(admNoKey);
 		personObjectModify.setName(name);
 		personObjectModify.setAge(age);
 		personObjectModify.setGrade(grade);
@@ -66,14 +72,17 @@ class Action
 	public void display()
 	{
 		student.forEach((k, v) -> {
+			System.out.printf("Admission No: "+ k +"\t");
             System.out.printf("Name: "+ v.getName()+"\t");
             System.out.printf("Age: "+ v.getAge()+"\t");
             System.out.printf("Grade: "+ v.getGrade()+"\n");
         });
 	}
-	public void delete(String nameDelete)
+	public void delete(String admNoDelete)
 	{
-		student.remove(nameDelete);
+		
+		student.remove(admNoDelete);
+		System.out.println("Deleted "+ admNoDelete);
 	}
 }
 
@@ -85,7 +94,7 @@ public class Student {
 		Action actionObject=new Action();
 		char ch='Y';
 		int choice;
-		String name,grade;
+		String admissionNumber,name,grade;
 		int age;
 		
 		do
@@ -97,35 +106,37 @@ public class Student {
 			switch(choice)
 			{
 			case 1:
+				System.out.println("Enter admission number");
+				admissionNumber=reader.readLine();
 				System.out.println("Enter name");
 				name=reader.readLine();
 				System.out.println("Enter age");
 				age=Integer.parseInt(reader.readLine());
 				System.out.println("Enter grade");
 				grade=reader.readLine();
-				actionObject.insertPerson(name,age,grade);
+				actionObject.insertPerson(admissionNumber,name,age,grade);
 				break;
 				
 			case 2:
-				String nameModify;
-				System.out.println("Enter the name of student to be modified");
-				nameModify=reader.readLine();
+				String admNoModify;
+				System.out.println("Enter the admission number of student to be modified");
+				admNoModify=reader.readLine();
 				System.out.println("Enter modified name");
 				name=reader.readLine();
 				System.out.println("Enter modified age");
 				age=Integer.parseInt(reader.readLine());
 				System.out.println("Enter modified grade");
 				grade=reader.readLine();
-				actionObject.modifyPerson(nameModify,name, age, grade);
+				actionObject.modifyPerson(admNoModify,name, age, grade);
 				break;
 			case 3:
 				actionObject.display();
 				break;
 			case 4:
-				String nameDelete;
-				System.out.println("Enter the name of student to be deleted");
-				nameDelete=reader.readLine();
-				actionObject.delete(nameDelete);
+				String admNoDelete;
+				System.out.println("Enter the admission number of student to be deleted");
+				admNoDelete=reader.readLine();
+				actionObject.delete(admNoDelete);
 				break;
 			case 5:
 				System.out.println("Do you want to continue(Y/N): ");
