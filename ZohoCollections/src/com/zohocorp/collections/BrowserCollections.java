@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -164,6 +165,12 @@ class Browser {
 		String extension;
 		String[] extensionsArray= {".com",".in",".org"};
 		
+		public void loopElements(Collection collectionName)
+		{
+			for(Object element:collectionName)    
+			    System.out.println(element);
+		}
+		
 		void visit(String visitUrl)
 		{
 			try
@@ -191,24 +198,21 @@ class Browser {
 		}
 		public void sortUrls()
 		{
-			ArrayList<String> visitUrlSort = new ArrayList<>(url);
+			java.util.List<String> visitUrlSort = new ArrayList<String>(url);
 			LinkedList<String> urlLinkedListSort=new LinkedList<>(urlLinkedList);
 			LinkedHashSet<String> urlLinkedHashSetSort=new LinkedHashSet<String>(urlLinkedHashSet);
 			
 			System.out.println("SORTED URLS:");
 			visitUrlSort.sort(null);
 			System.out.println("Array List");
-			for(String element:visitUrlSort)    
-			    System.out.println(element); 
+			loopElements(visitUrlSort); 
 			
 			System.out.println("Linked List");
 			urlLinkedListSort.sort(null);
-			for(String element:urlLinkedListSort)    
-				System.out.println(element); 
+			loopElements(urlLinkedListSort);
 			
 			System.out.println("Tree Set");
-			for(String element:urlTreeSet)    
-				System.out.println(element); 
+			loopElements(urlTreeSet); 
 			
 			
 			System.out.println("Linked HashSet");
@@ -227,17 +231,16 @@ class Browser {
 			urlHashSet.remove(urlDelete);
 			urlLinkedHashSet.remove(urlDelete);
 			urlTreeSet.remove(urlDelete);
+			fetchHistory();
 		}
 		public void fetchHistory()
 		{
 			System.out.println("VISITED URLS:");
 			System.out.println("Array List");
-			for(String element:url)    
-			    System.out.println(element); 
+			loopElements(url); 
 			
 			System.out.println("Linked List");
-			for(String element:urlLinkedList)    
-				System.out.println(element); 
+			loopElements(urlLinkedList); 
 			
 			Iterator<String> iteratorUrl=urlHashSet.iterator(); 
 			System.out.println("Hash Set");
@@ -245,12 +248,10 @@ class Browser {
 			   System.out.println(iteratorUrl.next()); 
 			
 			System.out.println("Linked Hash Set");
-			for(String element:urlLinkedHashSet)    
-				System.out.println(element);
+			loopElements(urlLinkedHashSet);
 			
 			System.out.println("Tree Set");
-			for(String element:urlTreeSet)    
-				System.out.println(element); 
+			loopElements(urlTreeSet); 
 		}
 		public void searchExtension(String extensionSeached) 
 		{
