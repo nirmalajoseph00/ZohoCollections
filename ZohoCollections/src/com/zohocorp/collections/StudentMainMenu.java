@@ -10,7 +10,7 @@ public class StudentMainMenu {
 	{
 		BufferedReader reader=new BufferedReader(new InputStreamReader(System.in));
 		Scanner in = new Scanner(System.in);
-		Student actionObject=new Student();
+		StudentActions actionObject=new StudentActions();
 		char ch='Y';
 		int choice;
 		String admissionNumber,name,grade;
