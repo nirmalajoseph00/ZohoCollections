@@ -80,9 +80,13 @@ class Action
 	}
 	public void delete(String admNoDelete)
 	{
-		
-		student.remove(admNoDelete);
-		System.out.println("Deleted "+ admNoDelete);
+		if (student.containsKey(admNoDelete)) 
+	    {
+			student.remove(admNoDelete);
+			System.out.println("Deleted "+ admNoDelete);
+	    }
+		else
+			System.out.println("Admission No. not present");
 	}
 }
 
